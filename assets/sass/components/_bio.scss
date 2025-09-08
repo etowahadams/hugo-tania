@@ -1,11 +1,135 @@
 .my {
     padding-top: 2rem;
     a {
-        border: none;
-        margin-right: 1rem;
-
-        &:hover {
-            border: none;
-        }
+        text-decoration: underline;
     }
+    figure {
+        float: right;
+        width: 200px;
+    }
+    figcaption {
+        font-size: .8em
+    }
+    .bio-social a {
+        text-decoration: none;
+    }
+}
+
+@media (max-width: 640px) {
+  .my {
+    figure {
+      display: none;
+    }
+  }
+}
+
+
+.papers {
+  margin-top: 1.25rem;
+
+  /* Year heading */
+  .papers-year-heading {
+    font-weight: 800;
+    letter-spacing: -0.015em;
+    margin: 1.25rem 0 0.5rem;
+  }
+
+  /* One paper row */
+  .paper {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 20px;
+    align-items: start;
+    padding: 18px 0;
+    border-top: 1px solid var(--paper-hairline);
+
+    &:first-of-type { border-top: 1px solid var(--paper-hairline); } /* keep a light rule above the first item for that “section” feel */
+
+    /* thumbnail */
+    .paper-thumb {
+      width: 120px; height: 120px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 1px solid var(--paper-hairline);
+      background: linear-gradient(135deg,#f3f4f6,#e5e7eb); /* placeholder bg */
+    }
+    .paper-thumb.placeholder { filter: saturate(.9); }
+
+    /* text block */
+    .paper-body { min-width: 0; }
+
+    // .paper-title {
+    //   margin: 0 0 .15rem 0;
+    //   font-weight: 800;
+    //   line-height: 1.18;
+    //   letter-spacing: -0.01em;
+    // }
+
+    .paper-venue {
+      font-style: italic;
+      color: var(--paper-muted);
+      font-size: 0.98rem;
+      margin-bottom: .35rem;
+      line-height: 1.35;
+    }
+
+    .paper-authors {
+      font-size: 1rem;
+      margin-bottom: .35rem;
+
+      /* if your shortcode bolds \"me\" with <strong>, make it pop slightly */
+      strong { font-weight: 800; }
+    }
+
+    .paper-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+      align-items: center;
+      margin-top: .25rem;
+
+      /* bracket-style links: [paper] [project page] */
+      .paper-link {
+        position: relative;
+        text-decoration: none;
+        font-size: 0.98rem;
+        color: var(--paper-link);
+
+        &::before { content: "["; margin-right: 2px; }
+        &::after  { content: "]"; margin-left: 2px; }
+
+        &:hover,
+        &:focus-visible {
+          text-decoration: underline;
+          outline: none;
+        }
+      }
+
+      /* red italic award chip, e.g., [Spotlight Paper] */
+      .paper-award {
+        display: inline-block;
+        font-size: 0.98rem;
+        font-style: italic;
+        color: var(--paper-danger);
+        background: var(--paper-chip-bg);
+        border: 1px solid var(--paper-chip-border);
+        padding: .15rem .5rem;
+        border-radius: 999px;
+      }
+    }
+  }
+
+  /* spacing between sections of different years */
+  .papers-year-heading + .paper { margin-top: .25rem; }
+}
+
+/* Responsive tweaks */
+@media (max-width: 720px) {
+  .papers .paper {
+    grid-template-columns: 88px 1fr;
+    gap: 14px;
+    .paper-thumb { width: 88px; height: 88px; border-radius: 10px; }
+    .paper-title { font-size: clamp(1.15rem, 4.8vw, 1.4rem); }
+    .paper-venue { font-size: .95rem; }
+  }
 }
